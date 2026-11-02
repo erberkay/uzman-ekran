@@ -55,12 +55,54 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
 <style>
 @media (max-width: 1100px){.ue-float[style*="left: 675px"]{position:static !important;margin-top:8px;justify-self:start}}
 </style>
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+.ue-burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid #33425F;background:transparent;color:#FFFFFF;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.ue-burger .ue-i-close{display:none}
+.ue-burger[aria-expanded="true"] .ue-i-open{display:none}
+.ue-burger[aria-expanded="true"] .ue-i-close{display:block}
+.ue-mcta{display:none}
+@media (max-width: 960px){
+  .ue-burger{display:flex}
+  .ue-menu{display:none !important;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch !important;gap:2px !important;padding:10px 16px 20px;background-color:#0E1A2E;border-bottom:1px solid #1D2B45;box-shadow:0 24px 48px rgba(0,0,0,.35)}
+  .ue-menu.open{display:flex !important;animation:ue-rise .3s ease both}
+  .ue-menu a{padding:14px 16px !important;font-size:17px;border-radius:12px !important}
+  .ue-menu .ue-mcta{display:flex;justify-content:center;margin-top:10px;background-color:#D0261F;color:#FFFFFF;font-weight:700}
+}
+@media (max-width: 560px){
+  .ue-header > div{padding:12px 16px !important}
+  .ue-hcta{display:none !important}
+}
+@media (max-width: 700px){
+  .ue-hline{display:none}
+  .ue-steps{gap:0 !important}
+  .ue-steps li{position:relative;padding:0 0 30px 68px;gap:6px !important}
+  .ue-steps li > span:first-child{position:absolute;left:0;top:0}
+  .ue-steps li h3{margin-top:10px !important}
+  .ue-steps li::before{content:"";position:absolute;left:23px;top:52px;bottom:4px;width:2px;background-color:#DCE0E8}
+  .ue-steps li:last-child::before{display:none}
+}
+@media (max-width: 600px){
+  .ue-monitor{aspect-ratio:4 / 4.4 !important;border-radius:18px !important}
+  .ue-lower{left:18px !important;right:18px !important;bottom:28px !important}
+  .ue-lower span[style*="font-size: 20px"]{font-size:17px !important}
+  .ue-lower span[style*="font-size: 14px"]{font-size:13px !important}
+  .ue-yayinda{right:12px !important;top:-14px !important}
+  .ue-chan{height:72px !important;font-size:12px}
+  #kanallar > div:last-child{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:10px !important}
+  .ue-expert{height:300px !important}
+  input,select,textarea{font-size:16px !important}
+  .ue-fab{right:16px !important;bottom:max(16px, env(safe-area-inset-bottom)) !important;width:56px;height:56px;min-height:56px !important;padding:0 !important;justify-content:center}
+  .ue-fab svg{width:22px;height:22px}
+  .ue-fab-t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+</style>
 </head>
 <body>
-<div style="font-family: 'Manrope', system-ui, sans-serif; color: #101828; background-color: #F3F4F7; min-height: 100vh; overflow-x: hidden">
+<div style="font-family: 'Manrope', system-ui, sans-serif; color: #101828; background-color: #F3F4F7; min-height: 100vh; overflow-x: clip">
 
 <!-- NAV -->
-<header style="position: sticky; top: 0; z-index: 30; background-color: rgba(14,26,46,.92); backdrop-filter: blur(14px); border-bottom: 1px solid #1D2B45">
+<header class="ue-header" style="position: sticky; top: 0; z-index: 30; background-color: rgba(14,26,46,.92); backdrop-filter: blur(14px); border-bottom: 1px solid #1D2B45">
 <div style="max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
 <a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
 <span style="width: 36px; height: 36px; border: 1.5px solid #FFFFFF; border-radius: 9px; display: flex; align-items: center; justify-content: center">
@@ -71,18 +113,23 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .32em; color: #AEB6C6; margin-top: 4px">TV MEDYA AJANSI</span>
 </span>
 </a>
-<nav class="ue-nav" aria-label="Ana menü" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 15px; font-weight: 600">
+<nav id="menu" class="ue-nav ue-menu" aria-label="Ana menü" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 15px; font-weight: 600">
 <a href="#top" style="padding: 10px 16px; border-radius: 999px; background-color: #22314D; color: #FFFFFF">Ana Sayfa</a>
 <a href="#hizmetler" style="padding: 10px 16px; border-radius: 999px">Hizmetler</a>
 <a href="#uzmanlar" style="padding: 10px 16px; border-radius: 999px">Uzmanlar</a>
 <a href="#surec" style="padding: 10px 16px; border-radius: 999px">Süreç</a>
 <a href="#kanallar" style="padding: 10px 16px; border-radius: 999px">Kanallar</a>
+<a href="#iletisim" class="ue-mcta">Başvuru Yap</a>
 </nav>
 <div style="display: flex; align-items: center; gap: 10px">
-<a href="#iletisim" class="ue-btn" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px; border-radius: 999px; background-color: #D0261F; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 15px">Başvuru Yap</a>
+<a href="#iletisim" class="ue-btn ue-hcta" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px; border-radius: 999px; background-color: #D0261F; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 15px">Başvuru Yap</a>
 <a href="tel:+900000000000" aria-label="Bizi arayın" class="ue-btn" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #33425F; display: flex; align-items: center; justify-content: center; color: #FFFFFF">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
 </a>
+<button type="button" class="ue-burger" aria-label="Menüyü aç" aria-expanded="false" aria-controls="menu">
+<svg class="ue-i-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+<svg class="ue-i-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
 </div>
 </div>
 </header>
@@ -117,7 +164,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
 
 <!-- STUDIO MONITOR (korundu) -->
 <div class="ue-in ue-d2" style="position: relative">
-<div style="position: relative; aspect-ratio: 4 / 3.4; border-radius: 22px; overflow: hidden; background-color: #12151D; border: 1px solid #263552; box-shadow: 0 40px 80px rgba(0,0,0,.4)">
+<div class="ue-monitor" style="position: relative; aspect-ratio: 4 / 3.4; border-radius: 22px; overflow: hidden; background-color: #12151D; border: 1px solid #263552; box-shadow: 0 40px 80px rgba(0,0,0,.4)">
 <div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(#1A1E28 1px, transparent 1px), linear-gradient(90deg, #1A1E28 1px, transparent 1px); background-size: 48px 48px; opacity: .7"></div>
 <div aria-hidden="true" class="ue-scan" style="position: absolute; left: 0; right: 0; height: 40%; background-image: linear-gradient(transparent, rgba(244,241,234,.04), transparent)"></div>
 <div style="position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 14px; color: #6E7383">
@@ -144,7 +191,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
 </div>
 </div>
 
-<div class="ue-float" style="position: absolute; right: -14px; top: 18%; padding: 10px 14px; border-radius: 999px; background-color: #D0261F; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; box-shadow: 0 12px 28px rgba(0,0,0,.3); animation-delay: -2.5s">YAYINDA</div>
+<div class="ue-float ue-yayinda" style="position: absolute; right: -14px; top: 18%; padding: 10px 14px; border-radius: 999px; background-color: #D0261F; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; box-shadow: 0 12px 28px rgba(0,0,0,.3); animation-delay: -2.5s">YAYINDA</div>
 </div>
 <div class="ue-float" style="position: absolute; left: 675px; display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 14px; background-color: #FFFFFF; color: #0B0D12; box-shadow: 0 18px 40px rgba(0,0,0,.35); top: 729px">
 <div class="ue-wave" aria-hidden="true" style="display: flex; align-items: center; gap: 3px; height: 24px; color: #D0261F"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -169,14 +216,14 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px">
-<div class="ue-card ue-rv" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
-<div class="ue-card ue-rv" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
-<div class="ue-card ue-rv" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
-<div class="ue-card ue-rv" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
-<div class="ue-card ue-rv" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
-<div class="ue-card ue-rv" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
-<div class="ue-card ue-rv" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
-<div class="ue-card ue-rv" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
+<div class="ue-card ue-rv ue-chan" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
+<div class="ue-card ue-rv ue-chan" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
+<div class="ue-card ue-rv ue-chan" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
+<div class="ue-card ue-rv ue-chan" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
+<div class="ue-card ue-rv ue-chan" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
+<div class="ue-card ue-rv ue-chan" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
+<div class="ue-card ue-rv ue-chan" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
+<div class="ue-card ue-rv ue-chan" style="height: 96px; border-radius: 16px; background-color: #FFFFFF; border: 1px solid #E3E6EC; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: .08em; color: #556070">[KANAL LOGOSU]</div>
 </div>
 </section>
 
@@ -275,28 +322,28 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
 </div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 18px">
-<article class="ue-card ue-rv" style="position: relative; height: 380px; border-radius: 20px; overflow: hidden; background-color: #0E1A2E; border: 1px solid #E3E6EC">
+<article class="ue-card ue-rv ue-expert" style="position: relative; height: 380px; border-radius: 20px; overflow: hidden; background-color: #0E1A2E; border: 1px solid #E3E6EC">
 <div class="ue-photo" style="position: absolute; inset: 0; background-color: #2A3854; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #AEB6C6; padding-bottom: 120px">[FOTOĞRAF]</div>
 <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 24px; background-color: rgba(14,26,46,.92); color: #FFFFFF; display: flex; flex-direction: column; gap: 6px">
 <h3 style="margin: 0; font-weight: 800; font-size: 21px">Doktorlar</h3>
 <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #C3CAD8">Etik kurallara uygun sağlık programı konukluğu.</p>
 </div>
 </article>
-<article class="ue-card ue-rv" style="position: relative; height: 380px; border-radius: 20px; overflow: hidden; background-color: #0E1A2E; border: 1px solid #E3E6EC">
+<article class="ue-card ue-rv ue-expert" style="position: relative; height: 380px; border-radius: 20px; overflow: hidden; background-color: #0E1A2E; border: 1px solid #E3E6EC">
 <div class="ue-photo" style="position: absolute; inset: 0; background-color: #2A3854; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #AEB6C6; padding-bottom: 120px">[FOTOĞRAF]</div>
 <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 24px; background-color: rgba(14,26,46,.92); color: #FFFFFF; display: flex; flex-direction: column; gap: 6px">
 <h3 style="margin: 0; font-weight: 800; font-size: 21px">İş İnsanları</h3>
 <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #C3CAD8">Ekonomi, girişimcilik ve gündem programları.</p>
 </div>
 </article>
-<article class="ue-card ue-rv" style="position: relative; height: 380px; border-radius: 20px; overflow: hidden; background-color: #0E1A2E; border: 1px solid #E3E6EC">
+<article class="ue-card ue-rv ue-expert" style="position: relative; height: 380px; border-radius: 20px; overflow: hidden; background-color: #0E1A2E; border: 1px solid #E3E6EC">
 <div class="ue-photo" style="position: absolute; inset: 0; background-color: #2A3854; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #AEB6C6; padding-bottom: 120px">[FOTOĞRAF]</div>
 <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 24px; background-color: rgba(14,26,46,.92); color: #FFFFFF; display: flex; flex-direction: column; gap: 6px">
 <h3 style="margin: 0; font-weight: 800; font-size: 21px">Ünlü Kuaförler &amp; Stilistler</h3>
 <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #C3CAD8">Yaşam ve moda programlarında canlı uygulama.</p>
 </div>
 </article>
-<article class="ue-card ue-rv" style="position: relative; height: 380px; border-radius: 20px; overflow: hidden; background-color: #0E1A2E; border: 1px solid #E3E6EC">
+<article class="ue-card ue-rv ue-expert" style="position: relative; height: 380px; border-radius: 20px; overflow: hidden; background-color: #0E1A2E; border: 1px solid #E3E6EC">
 <div class="ue-photo" style="position: absolute; inset: 0; background-color: #2A3854; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #AEB6C6; padding-bottom: 120px">[FOTOĞRAF]</div>
 <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 24px; background-color: rgba(14,26,46,.92); color: #FFFFFF; display: flex; flex-direction: column; gap: 6px">
 <h3 style="margin: 0; font-weight: 800; font-size: 21px">Hukukçular &amp; Akademisyenler</h3>
@@ -314,9 +361,9 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
 <h2 style="margin: 0; font-weight: 800; font-size: clamp(32px, 3.8vw, 52px); line-height: 1.08; letter-spacing: -.025em">İlk görüşmeden canlı yayına dört adım</h2>
 </div>
 <div style="position: relative">
-<div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 23px; height: 2px; background-color: #DCE0E8"></div>
-<div aria-hidden="true" class="ue-line" style="position: absolute; left: 0; right: 0; top: 23px; height: 2px; background-color: #D0261F"></div>
-<ol style="position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 28px">
+<div aria-hidden="true" class="ue-hline" style="position: absolute; left: 0; right: 0; top: 23px; height: 2px; background-color: #DCE0E8"></div>
+<div aria-hidden="true" class="ue-line ue-hline" style="position: absolute; left: 0; right: 0; top: 23px; height: 2px; background-color: #D0261F"></div>
+<ol class="ue-steps" style="position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 28px">
 <li class="ue-rv" style="display: flex; flex-direction: column; gap: 14px">
 <span style="width: 48px; height: 48px; border-radius: 50%; background-color: #FFFFFF; border: 2px solid #D0261F; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500">01</span>
 <h3 style="margin: 8px 0 0; font-weight: 800; font-size: 20px">Ön Görüşme</h3>
@@ -396,8 +443,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
 </footer>
 
 <!-- FLOATING CONTACT -->
-<a href="#iletisim" class="ue-btn ue-ring" style="position: fixed; right: 24px; bottom: 24px; z-index: 40; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 999px; background-color: #D0261F; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 15px">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"></path></svg>İletişim</a>
+<a href="#iletisim" aria-label="İletişim" class="ue-btn ue-ring ue-fab" style="position: fixed; right: 24px; bottom: 24px; z-index: 40; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 999px; background-color: #D0261F; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 15px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L3 21l2-6.2A8 8 0 1 1 21 12z"></path></svg><span class="ue-fab-t">İletişim</span></a>
 
 </div>
 <script>
@@ -406,6 +453,11 @@ input:focus,select:focus,textarea:focus{outline:2px solid #0E1A2E;outline-offset
   function p(n){return String(n).padStart(2,'0')}
   setInterval(function(){var ms=Date.now()-t0,s=Math.floor(ms/1000);tc.textContent='10:'+p(Math.floor(s/60)%60)+':'+p(s%60)+':'+p(Math.floor((ms%1000)/40));},120);
   document.getElementById('basvuru').addEventListener('submit',function(e){e.preventDefault();document.getElementById('sent').hidden=false;});
+  var b=document.querySelector('.ue-burger'),m=document.getElementById('menu');
+  function setMenu(o){m.classList.toggle('open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Menüyü kapat':'Menüyü aç');}
+  b.addEventListener('click',function(){setMenu(!m.classList.contains('open'));});
+  m.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false);});
 })();
 </script>
 </body>
